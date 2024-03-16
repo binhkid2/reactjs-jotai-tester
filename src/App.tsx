@@ -1,15 +1,16 @@
 
 import './App.css'
 import BottomBar from "../src/BottomBar"
+import JotaiAnime from './Jotai'
 function App() {
   return (
     <>
-     <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <BottomBar/>
+    <JotaiAnime/>
     </>
   )
 }
 
 export default App
+
+
+

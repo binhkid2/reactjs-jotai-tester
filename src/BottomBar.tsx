@@ -3,48 +3,64 @@ import { faFaceKissWinkHeart } from "@fortawesome/free-solid-svg-icons/faFaceKis
 import { faHandHoldingHeart } from "@fortawesome/free-solid-svg-icons/faHandHoldingHeart";
 import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+
+const nav: {
+  title: string;
+  url: string;
+  icon: JSX.Element;
+  activeIcon:JSX.Element;
+}[] = [
+  {
+    title: "Home",
+    url: "/",
+    icon: <FontAwesomeIcon icon={faHeart} />,
+    activeIcon: <FontAwesomeIcon icon={faHeart} style={{ color: "#008000" }} />,
+  },
+  {
+    title: "Manage",
+    url: "/manage",
+    icon: <FontAwesomeIcon icon={faHandHoldingHeart} />,
+    activeIcon: <FontAwesomeIcon icon={faHandHoldingHeart} style={{ color: "#008000" }} />,
+  },
+  {
+    title: "Notification",
+    url: "/notification",
+    icon: <FontAwesomeIcon icon={faFaceGrinHearts} />,
+    activeIcon: <FontAwesomeIcon icon={faFaceGrinHearts} style={{ color: "#008000" }} />,
+  },
+  {
+    title: "Profile",
+    url: "/profile",
+    icon: <FontAwesomeIcon icon={faFaceKissWinkHeart} />,
+    activeIcon: <FontAwesomeIcon icon={faFaceKissWinkHeart} style={{ color: "#008000" }} />,
+  },
+];
 
 export default function BottomBar() {
+  const [activeIndex, setActiveIndex] = useState(-1);
+function navigateUrl(index:number,url:string){
+  console.log(url)
+  setActiveIndex(index);
+
+}
   return (
     <>
-      <div className="fixed bottom-0 left-0 z-50 w-full h-10 ">
+      <div className="fixed bottom-0 left-0 z-50 w-full py-2 ">
         <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-          <button
-            type="button"
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-          >
-           <FontAwesomeIcon icon={faHeart} style={{color: "#008000",}} />
-            <span className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-green-600 dark:group-hover:text-green-500">
-              Trang chủ
-            </span>
-          </button>
-          <button
-            type="button"
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-          >
-          <FontAwesomeIcon icon={faHandHoldingHeart}  />
-            <span className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-green-600 dark:group-hover:text-green-500">
-              Cái gì đấy
-            </span>
-          </button>
-          <button
-            type="button"
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-          >
-          <FontAwesomeIcon icon={faFaceGrinHearts}  />
-            <span className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-green-600 dark:group-hover:text-green-500">
-              Yêu Thích
-            </span>
-          </button>
-          <button
-            type="button"
-            className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
-          >
-           <FontAwesomeIcon icon={faFaceKissWinkHeart}  />
-            <span className="text-xs text-gray-500 dark:text-gray-400 group-hover:text-green-600 dark:group-hover:text-green-500">
-              Cá Nhân
-            </span>
-          </button>
+          {nav.map((nav, index) => (
+            <button
+            onClick={()=>{navigateUrl(index,nav.url)}}
+              key={index}
+              type="button"
+              className="inline-flex flex-col gap-1 items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
+            >
+                {index === activeIndex ? nav.activeIcon : nav.icon}
+              <p className="text-xs  text-gray-500 dark:text-gray-400 group-hover:text-green-600 dark:group-hover:text-green-500">
+                {nav.title}
+              </p>
+            </button>
+          ))}
         </div>
       </div>
     </>

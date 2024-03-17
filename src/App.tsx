@@ -1,11 +1,12 @@
 
 import './App.css'
 import BottomBar from "../src/BottomBar"
-import JotaiAnime from './Jotai'
+import Todo from './Todo'
 function App() {
   return (
     <>
-    <JotaiAnime/>
+    <Todo/>
+    <BottomBar/>
     </>
   )
 }

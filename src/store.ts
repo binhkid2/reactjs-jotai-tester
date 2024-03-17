@@ -1,6 +1,17 @@
-import { atom } from 'jotai'
 
+import { atom } from 'jotai'
+import { atomWithStorage } from 'jotai/utils'
+
+// Create your atoms and derivatives
+export const textAtom = atom('hello')
+export const uppercaseAtom = atom(
+  (get) => get(textAtom).toUpperCase()
+)
 export const countAtom = atom(0)
+
+
+export const todoTitle = atom('')
+export const listTodo = atom<{ title: string; isComplete: boolean }[]>([]);
 
 export const countryAtom = atom('Japan')
 
@@ -18,3 +29,4 @@ export const animeAtom = atom([
     watched: false
   }
 ])
+export const darkModeAtom = atomWithStorage('darkMode', false)
